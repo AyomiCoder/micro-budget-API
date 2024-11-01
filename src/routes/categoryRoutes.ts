@@ -2,19 +2,20 @@
 
 import express from 'express';
 import { createCategory, getCategoryById, updateCategory, deleteCategory } from '../controllers/categoryController';
+import { authenticate } from '../middleware/authMiddleware';
 
 const router = express.Router();
 
 // Create a new category
-router.post('/', createCategory);
+router.post('/', authenticate, createCategory);
 
 // Get category details by ID
-router.get('/:id', getCategoryById);
+router.get('/:id', authenticate, getCategoryById);
 
 // Update category details
-router.patch('/:id', updateCategory);
+router.patch('/:id', authenticate, updateCategory);
 
 // Delete a category by ID
-router.delete('/:id', deleteCategory);
+router.delete('/:id', authenticate, deleteCategory);
 
 export default router;
